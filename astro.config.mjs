@@ -4,8 +4,9 @@ import tailwind from "@astrojs/tailwind";
 
 import react from "@astrojs/react";
 
-// https://astro.build/config
 export default defineConfig({
+  site: 'https://imdni8.github.io',
+  base: '/portfolio-website',
   integrations: [tailwind(), react({
     experimentalReactChildren: true,
   })],
