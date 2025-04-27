@@ -1,0 +1,78 @@
+---
+// src/pages/projects/[slug].astro
+import Layout from '../../components/Layout.astro';
+import ProgressBar from '../../components/ProgressBar.astro';
+
+export async function getStaticPaths() {
+  function getSlug(filePath: string): string {
+    if (!filePath) return '';
+    const parts = filePath.split('/');
+    const filename = parts[parts.length - 1] || '';
+    return filename.replace('.md', '');
+  }
+
+  const projectFiles = import.meta.glob('../../../content/projects/*.md', { eager: true });
+
+  return Object.entries(projectFiles).map(([path, projectModule]: [string, any]) => {
+    const slug = getSlug(path);
+    const project = {
+      frontmatter: projectModule.frontmatter,
+      rawContent: projectModule.rawContent,
+      default: projectModule.default,
+      file: path
+    };
+
+    return {
+      params: { slug },
+      props: { project },
+    };
+  });
+}
+
+const { project } = Astro.props;
+const Content = project.default;
+---
+
+<Layout>
+  <ProgressBar title={project.frontmatter.title} backLink="/" />
+  
+  <article class="max-w-content mx-auto py-6 md:py-12">
+    <div class="project-header mb-8 md:mb-12">
+      <h1 class="font-serif text-[24px] md:text-[32px] leading-[120%] tracking-[-2%] font-bold mb-4">{project.frontmatter.title}</h1>
+      <p class="font-serif text-[16px] font-light text-text-secondary">
+        {new Date(project.frontmatter.date).toLocaleDateString('en-US', { 
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        })}
+      </p>
+    </div>
+
+    <div class="project-content prose prose-sm md:prose-base">
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .prose {
+    @apply font-serif text-[16px] md:text-[20px] font-light leading-[150%] md:leading-[120%];
+  }
+  
+  .prose :global(h1),
+  .prose :global(h2),
+  .prose :global(h3),
+  .prose :global(h4),
+  .prose :global(h5),
+  .prose :global(h6) {
+    @apply font-serif font-medium leading-[120%] tracking-[-0.02em] mt-8 mb-4;
+  }
+
+  .prose :global(p) {
+    @apply mb-6;
+  }
+
+  .prose :global(img) {
+    @apply w-full rounded-lg my-8;
+  }
+</style>

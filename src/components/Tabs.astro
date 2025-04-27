@@ -1,0 +1,36 @@
+---
+const currentPath = Astro.url.pathname;
+const isProjectsActive = currentPath === '/';
+const isEssaysActive = currentPath === '/essays';
+const isAboutActive = currentPath === '/about';
+
+// Base classes for the navigation items
+const triggerBase = "px-6 py-2 font-sans text-[16px] transition-colors duration-200 rounded-[4px]";
+const activeClasses = "bg-[#FF9900]"; 
+const inactiveClasses = "hover:bg-[#FFDDAB]"; 
+
+// Determine classes based on active state
+const projectsTriggerClasses = `${triggerBase} ${isProjectsActive ? activeClasses : inactiveClasses}`;
+const essaysTriggerClasses = `${triggerBase} ${isEssaysActive ? activeClasses : inactiveClasses}`;
+const aboutTriggerClasses = `${triggerBase} ${isAboutActive ? activeClasses : inactiveClasses}`;
+---
+
+<nav class="flex justify-center items-center gap-4">
+  <a href="/" class={projectsTriggerClasses}>
+    PROJECTS
+  </a>
+  <a href="/essays" class={essaysTriggerClasses}>
+    ESSAYS
+  </a>
+  <a href="/about" class={aboutTriggerClasses}>
+    ABOUT ME
+  </a>
+</nav>
+
+<style>
+  a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+  }
+</style>

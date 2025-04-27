@@ -1,0 +1,49 @@
+---
+// src/pages/essays.astro
+import Layout from '../components/Layout.astro';
+
+const essayFiles = import.meta.glob('../../content/essays/*.md', { eager: true });
+
+const essays = Object.entries(essayFiles).map(([path, essayModule]: [string, any]) => {
+  return {
+    frontmatter: essayModule.frontmatter,
+    rawContent: essayModule.rawContent,
+    default: essayModule.default,
+    file: path
+  };
+});
+
+function getSlug(filePath: string | undefined): string {
+  if (!filePath) return '';
+  const parts = filePath.split('/');
+  const filename = parts[parts.length - 1] || '';
+  return filename.replace('.md', '');
+}
+---
+
+<Layout>
+  <div class="space-y-6">
+    <h1 class="text-[32px] font-serif font-medium tracking-[-2%] leading-[120%] mb-8">Essays</h1>
+    <div class="essays-container space-y-4">
+      {essays.map(essay => {
+        const slug = getSlug(essay.file);
+        return (
+          <a
+            href={`/essays/${slug}`}
+            class="block text-[20px] font-medium font-serif tracking-[-2%] leading-[120%] border-b border-gray-300 py-4 hover:italic hover:text-secondary active:text-primary active:border-primary transition-all"
+          >
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+              <span>{essay.frontmatter.title}</span>
+              <span class="text-[16px] font-light text-text-secondary">
+                {new Date(essay.frontmatter.date).toLocaleDateString('en-US', { 
+                  month: 'short',
+                  year: 'numeric'
+                })}
+              </span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</Layout>

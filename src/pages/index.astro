@@ -1,0 +1,49 @@
+---
+// src/pages/index.astro
+import Layout from '../components/Layout.astro';
+
+const projectFiles = import.meta.glob('../../content/projects/*.md', { eager: true });
+
+const projects = Object.entries(projectFiles).map(([path, projectModule]: [string, any]) => {
+  return {
+    frontmatter: projectModule.frontmatter,
+    rawContent: projectModule.rawContent,
+    default: projectModule.default,
+    file: path
+  };
+});
+
+function getSlug(filePath: string | undefined): string {
+  if (!filePath) return '';
+  const parts = filePath.split('/');
+  const filename = parts[parts.length - 1] || '';
+  return filename.replace('.md', '');
+}
+---
+
+<Layout>
+  <div class="space-y-6">
+    <h1 class="text-[32px] font-serif font-medium tracking-[-2%] leading-[120%] mb-8">Projects</h1>
+    <div class="projects-container space-y-4">
+      {projects.map(project => {
+        const slug = getSlug(project.file);
+        return (
+          <a
+            href={`/projects/${slug}`}
+            class="block text-[20px] font-medium font-serif tracking-[-2%] leading-[120%] border-b border-gray-300 py-4 hover:italic hover:text-secondary active:text-primary active:border-primary transition-all"
+          >
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+              <span>{project.frontmatter.title}</span>
+              <span class="text-[16px] font-light text-text-secondary">
+                {new Date(project.frontmatter.date).toLocaleDateString('en-US', { 
+                  month: 'short',
+                  year: 'numeric'
+                })}
+              </span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</Layout>

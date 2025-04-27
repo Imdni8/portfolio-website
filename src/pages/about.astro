@@ -1,0 +1,37 @@
+---
+// src/pages/about.astro
+import Layout from '../components/Layout.astro';
+import { Badge } from "@/components/ui/badge"
+---
+
+<Layout>
+    <section id="about" class="mx-auto max-w-content px-4">
+        <h1 class="text-[32px] md:text-4xl font-serif font-medium primary-foreground mb-6">
+          About Me
+        </h1>
+      
+        <p class="text-[16px] font-light font-serif text-primary-foreground-foreground mb-4">
+          Hey there! I’m Tousif—born in Kolkata but lucky enough to have called seven different cities across India “home.” Each place taught me something new about people, culture, and perspective, and I carry those lessons into my work every day.
+        </p>
+      
+        <p class="text-[16px] font-light font-serif text-primary-foreground mb-4">
+          I’m a growth-focused product designer with over 5 years of experience creating cross-platform apps, from Philips’s My Virtual Care to J&J’s Digital Endpoint Ecosystem. I thrive on using data and experimentation to solve real user problems—whether that meant boosting patient engagement by 62% or redesigning onboarding flows to lift daily active users by 20%. Along the way, I’ve also been honored with multiple iF awards for MVC, PGHS, and ECG Reports.
+        </p>
+      
+        <p class="text-[16px] font-light font-serif text-primary-foreground mb-4">
+          When I’m not sketching wireframes or testing prototypes, you’ll find me catching waves at dawn, getting lost in a great novel, or cheering on Barça from my couch. And after the match, I might unwind with Mehdi Hassan’s timeless ghazals—or maybe a bit of Bonobo.
+        </p>
+      
+        <div class="mt-8 font-serif">
+          <h2 class="text-xl font-medium text-primary-foreground mb-4">
+            My Core Values
+          </h2>
+          <div class="flex flex-wrap gap-4">
+            <Badge variant="outline" className="px-3 text-[14px] font-serif">Integrity</Badge>
+            <Badge variant="outline" className="px-3 text-[14px] font-serif">Consistency</Badge>
+            <Badge variant="outline" className="px-3 text-[14px] font-serif">Craft</Badge>
+          </div>
+        </div>
+      </section>
+      
+</Layout>

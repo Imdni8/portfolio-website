@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  backLink: string;
+}
+
+const { title, backLink } = Astro.props;
+---
+
+<div id="progressBarContainer" class="fixed top-0 left-0 w-full bg-accent shadow-md transition-all duration-200 opacity-0 pointer-events-none z-30">
+  <div class="max-w-content mx-auto px-4 py-3 items-center justify-between">
+    <!-- <a href={backLink} class="font-sans text-[16px] hover:text-secondary transition-colors">← Back</a> -->
+    <h2 class="font-serif text-[16px] font-light text-center">{title}</h2>
+    <div class="w-[52px]"></div><!-- Spacer to balance the back button -->
+  </div>
+  <div id="progressBar" class="h-1 bg-primary w-0 transition-none"></div>
+</div>
+
+<script>
+  const progressBarContainer = document.getElementById('progressBarContainer');
+  const progressBar = document.getElementById('progressBar');
+  const title = document.querySelector('h1');
+
+  let titleScrolled = false;
+
+  function updateProgressBar() {
+    if (!progressBar || !title || !progressBarContainer) return;
+
+    const titleRect = title.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight - windowHeight;
+    const scrolled = window.scrollY;
+
+    // Only show progress after title is scrolled past
+    titleScrolled = titleRect.bottom < 0;
+
+    if (titleScrolled) {
+      const progress = (scrolled / documentHeight) * 100;
+      progressBar.style.width = `${progress}%`;
+      progressBarContainer.style.opacity = '1';
+      progressBarContainer.style.pointerEvents = 'auto';
+    } else {
+      progressBarContainer.style.opacity = '0';
+      progressBarContainer.style.pointerEvents = 'none';
+    }
+  }
+
+  window.addEventListener('scroll', updateProgressBar);
+  window.addEventListener('resize', updateProgressBar);
+</script>
