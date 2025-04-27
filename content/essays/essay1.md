@@ -7,7 +7,7 @@ date: 2025-04-20
 
 This is an example essay written in Markdown.
 
-This is an example project description in Markdown. This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.
+This is an example project description in Markdown. This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.
 
 This is an example project description in Markdown. This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.This is an example project description in Markdown.
 
@@ -16,4 +16,4 @@ This is an example project description in Markdown. This is an example project d
 - List item 1
 - List item 2
 
-![Example Image](/images/essay1_photo1.png)
+![Example Image](/portfolio-website/images/essay1_photo1.png)

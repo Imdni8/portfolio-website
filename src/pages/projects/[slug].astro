@@ -1,5 +1,4 @@
 ---
-// src/pages/projects/[slug].astro
 import Layout from '../../components/Layout.astro';
 import ProgressBar from '../../components/ProgressBar.astro';
 
@@ -35,7 +34,7 @@ const Content = project.default;
 
 <Layout>
   <ProgressBar title={project.frontmatter.title} backLink="/" />
-  
+
   <article class="max-w-content mx-auto py-6 md:py-12">
     <div class="project-header mb-8 md:mb-12">
       <h1 class="font-serif text-[24px] md:text-[32px] leading-[120%] tracking-[-2%] font-bold mb-4">{project.frontmatter.title}</h1>

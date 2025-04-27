@@ -9,6 +9,9 @@ interface MobileNavProps {
 
 export function MobileNav({ currentPath }: MobileNavProps) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const base = import.meta.env.BASE_URL;
+  // Normalize the current path by removing the base
+  const normalizedPath = currentPath.replace(base, '') || '/';
 
   const links = [
     { href: "/", label: "PROJECTS" },
@@ -41,10 +44,10 @@ export function MobileNav({ currentPath }: MobileNavProps) {
             {links.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={base + link.href}
                 onClick={handleNavigation}
                 className={`block w-full text-center py-3 px-4 rounded-md font-sans text-[16px] transition-all duration-200 ${
-                  currentPath === link.href 
+                  normalizedPath === link.href 
                     ? "bg-primary text-primary-foreground" 
                     : "bg-accent hover:bg-primary/90 hover:text-primary-foreground border border-primary/20"
                 }`}

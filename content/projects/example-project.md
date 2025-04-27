@@ -16,4 +16,4 @@ This is an example project description in Markdown. This is an example project d
 - Astro
 - Markdown
 
-![Project Image](/images/Proj1_photo1.png)
+![Project Image](/portfolio-website/images/Proj1_photo1.png)

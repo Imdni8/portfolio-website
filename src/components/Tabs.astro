@@ -1,8 +1,11 @@
 ---
 const currentPath = Astro.url.pathname;
-const isProjectsActive = currentPath === '/';
-const isEssaysActive = currentPath === '/essays';
-const isAboutActive = currentPath === '/about';
+const base = import.meta.env.BASE_URL;
+// Remove base prefix from currentPath for comparison
+const normalizedPath = currentPath.replace(base, '');
+const isProjectsActive = normalizedPath === '/' || normalizedPath === '';
+const isEssaysActive = normalizedPath === '/essays';
+const isAboutActive = normalizedPath === '/about';
 
 // Base classes for the navigation items
 const triggerBase = "px-6 py-2 font-sans text-[16px] transition-colors duration-200 rounded-[4px]";
@@ -16,13 +19,13 @@ const aboutTriggerClasses = `${triggerBase} ${isAboutActive ? activeClasses : in
 ---
 
 <nav class="flex justify-center items-center gap-4">
-  <a href="/" class={projectsTriggerClasses}>
+  <a href={base + "/"} class={projectsTriggerClasses}>
     PROJECTS
   </a>
-  <a href="/essays" class={essaysTriggerClasses}>
+  <a href={base + "/essays"} class={essaysTriggerClasses}>
     ESSAYS
   </a>
-  <a href="/about" class={aboutTriggerClasses}>
+  <a href={base + "/about"} class={aboutTriggerClasses}>
     ABOUT ME
   </a>
 </nav>

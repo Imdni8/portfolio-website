@@ -25,6 +25,12 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: List workspace contents
+        run: |
+          echo "Workspace contents:"
+          ls -la
+          echo "Dist folder contents:"
+          ls -la dist || echo "dist folder not found!"
       - name: Upload Pages artifact
         uses: actions/upload-artifact@v3
         with:

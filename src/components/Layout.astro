@@ -5,6 +5,7 @@ import { MobileNav } from './MobileNav';
 import { Logo } from './Logo';
 
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
 ---
 
 <html lang="en" class="h-full">
@@ -14,19 +15,19 @@ const currentPath = Astro.url.pathname;
   <title>Portfolio</title>
   
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/images/logo-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/images/logo-512x512.png">
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+  <link rel="icon" type="image/png" sizes="32x32" href={`${base}images/logo-32x32.png`}>
+  <link rel="icon" type="image/png" sizes="16x16" href={`${base}images/logo-16x16.png`}>
+  <link rel="apple-touch-icon" sizes="180x180" href={`${base}images/logo-180x180.png`}>
+  <link rel="icon" type="image/png" sizes="192x192" href={`${base}images/logo-192x192.png`}>
+  <link rel="icon" type="image/png" sizes="512x512" href={`${base}images/logo-512x512.png`}>
   
   <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body class="flex min-h-full flex-col">
   <header class="flex justify-between items-center p-4 pb-12 max-w-content mx-auto w-full">
-    <a href="/" class="font-bold">
+    <a href={base + "/"} class="font-bold">
       <Logo client:load size={64} />
     </a>
     <nav class="hidden md:block">
